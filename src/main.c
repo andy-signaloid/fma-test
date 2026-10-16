@@ -1,24 +1,18 @@
+#include <math.h>
 #include <stdio.h>
 #include <uxhw.h>
 
 int
-main(int argc, char *  argv[])
+main(void)
 {
-	double	a, b, c;
+	double X = UxHwDoubleUniformDist(0, 1);
+	double Y = UxHwDoubleUniformDist(0, 1);
+	double Z = UxHwDoubleUniformDist(0, 1);
 
-	a = UxHwDoubleUniformDist(0.5, 1.0);
-	printf("a = %lf\n", a);
+    double infer_fma = (X*Y)+Z;
+    double explicit_fma = fma(X, Y, Z);
 
-	b = UxHwDoubleUniformDist(10.0, 20.0);
-	printf("b = %lf\n", b);
-
-	c = (a+b)/(a-b);
-	printf("c = %lf\n", c);
-
-#ifdef DEBUG
-	printf("debug message\n");
-#endif
-
+    printf("%f\r\n", infer_fma);
+    printf("%f\r\n", explicit_fma);
 	return 0;
 }
-
